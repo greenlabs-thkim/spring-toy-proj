@@ -4,22 +4,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @Entity
 public class Goal {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
     private String description;
-    private String create_time;
-    private short status;
+    private LocalDateTime createTime;
+    private Short status;
 
-    public long getId() {
+    public Goal() {
+        status = 0;
+        createTime = LocalDateTime.now();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -39,12 +45,12 @@ public class Goal {
         this.description = description;
     }
 
-    public String getCreate_time() {
-        return create_time;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(String create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(LocalDateTime create_time) {
+        this.createTime = create_time;
     }
 
     public short getStatus() {

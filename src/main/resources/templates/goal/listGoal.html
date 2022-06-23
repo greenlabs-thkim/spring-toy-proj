@@ -8,12 +8,18 @@
             <thead>
             <tr>
                 <th>이름</th>
-                <th>설명</th> </tr>
+                <th>설명</th>
+                <th>가입</th>
+            </tr>
             </thead>
             <tbody>
             <tr th:each="goal : ${goals}">
                 <td th:text="${goal.name}"></td>
                 <td th:text="${goal.description}"></td>
+                <td><form action="/goal/entry" method="post">
+                    <button type="submit">가입</button>
+                    <input type="hidden" name="id" th:value="${goal.id}">
+                </form></td>
             </tr>
             </tbody>
         </table>

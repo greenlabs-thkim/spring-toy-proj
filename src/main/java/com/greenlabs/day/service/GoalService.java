@@ -8,8 +8,9 @@ import java.util.List;
 public class GoalService {
     private final GoalRepository goalRepository;
 
-    public GoalService(GoalRepository repository) {
-        goalRepository = repository;
+
+    public GoalService(GoalRepository goalRepository) {
+        this.goalRepository = goalRepository;
     }
 
     public long regist(Goal goal) {

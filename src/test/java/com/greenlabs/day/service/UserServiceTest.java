@@ -22,14 +22,14 @@ class UserServiceTest {
     void login() {
         User user = new User();
         user.setEmail("email1");
-        user.setDisplay_name("user1");
+        user.setDisplayName("user1");
         user.setName("user1");
         user.setPassword("password1");
         userService.regist(user);
 
         User user2 = new User();
         user2.setEmail("email2");
-        user2.setDisplay_name("user2");
+        user2.setDisplayName("user2");
         user2.setName("user2");
         user2.setPassword("password2");
         userService.regist(user2);
@@ -42,7 +42,7 @@ class UserServiceTest {
     void 로그인_예외케이스() {
         User user = new User();
         user.setEmail("email1");
-        user.setDisplay_name("user1");
+        user.setDisplayName("user1");
         user.setName("user1");
         user.setPassword("password1");
         userService.regist(user);

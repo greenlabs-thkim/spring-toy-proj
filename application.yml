@@ -3,7 +3,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL57Dialect
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
 
   datasource:
     url: jdbc:mariadb://tdb.wssw.kr:3306/toyproj

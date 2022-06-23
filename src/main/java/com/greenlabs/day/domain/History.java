@@ -1,42 +1,48 @@
 package com.greenlabs.day.domain;
 
+import java.time.LocalDateTime;
+
 public class History {
-    private long id;
-    private long join_id;
-    private String start_time;
-    private String end_time;
+    private Long id;
+    private Long entryId;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
+    public History() {
+        startTime = LocalDateTime.now();
+    }
 
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getJoin_id() {
-        return join_id;
+    public Long getEntryId() {
+        return entryId;
     }
 
-    public void setJoin_id(long join_id) {
-        this.join_id = join_id;
+    public void setEntryId(Long entryId) {
+        this.entryId = entryId;
     }
 
-    public String getStart_time() {
-        return start_time;
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setStart_time(String start_time) {
-        this.start_time = start_time;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 
-    public String getEnd_time() {
-        return end_time;
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
-    public void setEnd_time(String end_time) {
-        this.end_time = end_time;
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
 }

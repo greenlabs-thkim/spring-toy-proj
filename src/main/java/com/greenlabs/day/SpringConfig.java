@@ -3,24 +3,23 @@ package com.greenlabs.day;
 
 import com.greenlabs.day.repository.*;
 import com.greenlabs.day.service.GoalService;
+import com.greenlabs.day.service.EntryService;
 import com.greenlabs.day.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.persistence.EntityManager;
-import javax.sql.DataSource;
-import javax.swing.*;
-
 @Configuration
 public class SpringConfig {
     private final UserRepository userRepository;
     private final GoalRepository goalRepository;
+    private final EntryRepository entryRepository;
 
     @Autowired
-    public SpringConfig(UserRepository userRepository, GoalRepository goalRepository) {
+    public SpringConfig(UserRepository userRepository, GoalRepository goalRepository, EntryRepository entryRepository) {
         this.userRepository = userRepository;
         this.goalRepository = goalRepository;
+        this.entryRepository = entryRepository;
     }
 
     @Bean
@@ -43,4 +42,9 @@ public class SpringConfig {
 //    public GoalRepository goalRepository() {
 //        return new MemoryGoalRepository();
 //    }
+
+    @Bean
+    public EntryService entryService() {
+        return new EntryService(entryRepository);
+    }
 }

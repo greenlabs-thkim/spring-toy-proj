@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface GoalRepository {
     Goal save(Goal goal);
-    Optional<Goal> findById(long id);
+    Optional<Goal> findById(Long id);
     List<Goal> findAllByName(String name);
     List<Goal> findAllByStatus(short status);
     List<Goal> findAllByStatusAndName(short status, String name);

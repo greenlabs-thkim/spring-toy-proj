@@ -11,7 +11,7 @@ public interface JpaGoalRepository extends CrudRepository<Goal, Long>, GoalRepos
     Goal save(Goal goal);
 
     @Override
-    Optional<Goal> findById(long id);
+    Optional<Goal> findById(Long id);
 
     @Override
     List<Goal> findAllByName(String name);

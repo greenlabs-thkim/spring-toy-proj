@@ -21,7 +21,7 @@ public class MemoryGoalRepository implements GoalRepository {
     }
 
     @Override
-    public Optional<Goal> findById(long id) {
+    public Optional<Goal> findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 

@@ -47,7 +47,7 @@ public class UserService {
             return ;
         }
 
-        if (user.getDisplay_name() == null) {
+        if (user.getDisplayName() == null) {
             throw new IllegalStateException("display_name 은 필수 입력값 입니다.");
         }
 
