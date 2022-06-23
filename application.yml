@@ -10,3 +10,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     username: testuser
     password: qwer1234!
+  security:
+    user:
+      name: testuser
+      password: qwer1234!
