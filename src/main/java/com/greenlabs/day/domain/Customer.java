@@ -1,4 +1,4 @@
-package com.greenlabs.day;
+package com.greenlabs.day.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

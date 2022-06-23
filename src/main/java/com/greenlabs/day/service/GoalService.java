@@ -18,12 +18,14 @@ public class GoalService {
     }
 
     public List<Goal> search(Goal goal) {
-        if(goal.getStatus() > 0 && !goal.getName().isEmpty()) {
-            return goalRepository.findByStatusAndName(goal.getStatus(), goal.getName());
-        } else if (goal.getStatus() > 0) {
-            return goalRepository.findByStatus(goal.getStatus());
-        } else if (!goal.getName().isEmpty()) {
-            return goalRepository.findByName(goal.getName());
+        if (goal != null) {
+            if (goal.getStatus() > 0 && goal.getName() != null && !goal.getName().isEmpty()) {
+                return goalRepository.findByStatusAndName(goal.getStatus(), goal.getName());
+            } else if (goal.getStatus() > 0) {
+                return goalRepository.findByStatus(goal.getStatus());
+            } else if (goal.getName() != null && !goal.getName().isEmpty()) {
+                return goalRepository.findByName(goal.getName());
+            }
         }
 
         return goalRepository.findAll();
