@@ -26,7 +26,7 @@ public class MemoryGoalRepository implements GoalRepository {
     }
 
     @Override
-    public List<Goal> findByName(String name) {
+    public List<Goal> findAllByName(String name) {
         List<Goal> collect = store.values().stream()
                 .filter(user -> user.getName().contentEquals(name))
                 .collect(Collectors.toList());
@@ -34,7 +34,7 @@ public class MemoryGoalRepository implements GoalRepository {
     }
 
     @Override
-    public List<Goal> findByStatus(short status) {
+    public List<Goal> findAllByStatus(short status) {
         List<Goal> collect = store.values().stream()
                 .filter(user -> user.getStatus() == status)
                 .collect(Collectors.toList());
@@ -42,7 +42,7 @@ public class MemoryGoalRepository implements GoalRepository {
     }
 
     @Override
-    public List<Goal> findByStatusAndName(short status, String name) {
+    public List<Goal> findAllByStatusAndName(short status, String name) {
         List<Goal> collect = store.values().stream()
                 .filter(user -> user.getStatus() == status)
                 .filter(user -> user.getName().contentEquals(name))
