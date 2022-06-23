@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    url: jdbc:mariadb://tdb.wssw.kr:3306/toyproj
+    driver-class-name: org.mariadb.jdbc.Driver
+    username: testuser
+    password: qwer1234!
