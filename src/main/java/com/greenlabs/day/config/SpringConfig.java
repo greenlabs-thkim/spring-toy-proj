@@ -1,4 +1,4 @@
-package com.greenlabs.day;
+package com.greenlabs.day.config;
 
 
 import com.greenlabs.day.repository.*;
