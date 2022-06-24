@@ -45,4 +45,12 @@ public class GoalController {
         entryService.entry(goal.getId(), 888L);
         return "redirect:/";
     }
+
+    @GetMapping("goal/list/user")
+    public String listGoalByUser(Model model) {
+
+//        List<Goal> goalList = goalService.search(new Goal());
+//        model.addAttribute("goals", goalList);
+        return "redirect:/";
+    }
 }

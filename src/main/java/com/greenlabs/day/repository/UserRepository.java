@@ -1,13 +1,11 @@
 package com.greenlabs.day.repository;
 
 import com.greenlabs.day.domain.User;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository {
-    User save(User user);
-    Optional<User> findById(long id);
+public interface UserRepository extends CrudRepository<User, Long> {
     Optional<User> findByEmail(String email);
-    List<User> findAll();
 }

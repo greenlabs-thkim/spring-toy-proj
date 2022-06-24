@@ -2,11 +2,9 @@ package com.greenlabs.day.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +26,33 @@ public class User {
     private String roles = "";
     private String permissions = "";
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Entry> entryList = new ArrayList<Entry>();
+
+    public void addEntry(Entry entry) {
+        entryList.add(entry);
+        entry.setUser(this);
+    }
+
+    public List<Entry> getEntryList() {
+        return entryList;
+    }
+
+    public void setEntryList(List<Entry> entryList) {
+        this.entryList = entryList;
+    }
+
+
+    public User() {
+    }
+
+    public User(String email, String password, String displayName) {
+        this.email = email;
+        this.password = password;
+        this.displayName = displayName;
+    }
+
     public List<String> getRoleList(){
         if(this.roles.length()>0){
             return Arrays.asList(this.roles.split(","));
@@ -42,5 +67,14 @@ public class User {
         }
 
         return new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email=" + email +
+                ", displayName=" + displayName +
+                "}";
     }
 }

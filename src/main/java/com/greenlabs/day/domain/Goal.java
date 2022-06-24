@@ -1,11 +1,18 @@
 package com.greenlabs.day.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.Value;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Getter
+@Setter
 @Entity
 public class Goal {
 
@@ -16,51 +23,42 @@ public class Goal {
     private LocalDateTime createTime;
     private Short status;
 
+    @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Entry> entryList = new ArrayList<Entry>();
+
+    public void addEntry(Entry entry) {
+        entryList.add(entry);
+        entry.setGoal(this);
+    }
+
+    public List<Entry> getEntryList() {
+        return entryList;
+    }
+
+    public void setEntryList(List<Entry> entryList) {
+        this.entryList = entryList;
+    }
+
+
     public Goal() {
         status = 0;
         createTime = LocalDateTime.now();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Goal(String name, String description) {
+        this();
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    @Override
+    public String toString() {
+        return "Goal{" +
+                "id=" + id +
+                ", name=" + description +
+                ", status=" + status +
+                "}";
     }
-
-    public void setCreateTime(LocalDateTime create_time) {
-        this.createTime = create_time;
-    }
-
-    public short getStatus() {
-        return status;
-    }
-
-    public void setStatus(short status) {
-        this.status = status;
-    }
-
-
 
 }

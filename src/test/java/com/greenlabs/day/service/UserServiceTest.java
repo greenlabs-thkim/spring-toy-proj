@@ -1,22 +1,27 @@
 package com.greenlabs.day.service;
 
 import com.greenlabs.day.domain.User;
-import com.greenlabs.day.repository.MemoryUserRepository;
+import com.greenlabs.day.repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SpringBootTest
+@Transactional
 class UserServiceTest {
-    MemoryUserRepository userRepository = new MemoryUserRepository();
-    UserService userService = new UserService(userRepository);
+    UserRepository userRepository;
+    UserService userService;
 
-    @AfterEach
-    void afterEach() {
-        userRepository.clearStore();
+    @Autowired
+    void UserServiceTest(UserRepository userRepository, UserService userService) {
+        this.userRepository = userRepository;
+        this.userService = userService;
     }
-
 
     @Test
     void login() {

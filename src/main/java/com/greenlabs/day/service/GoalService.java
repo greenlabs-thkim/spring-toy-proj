@@ -29,6 +29,6 @@ public class GoalService {
             }
         }
 
-        return goalRepository.findAll();
+        return (List<Goal>) goalRepository.findAll();
     }
 }

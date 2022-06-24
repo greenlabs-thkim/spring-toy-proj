@@ -1,10 +1,21 @@
 package com.greenlabs.day.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Setter
+@Getter
+@Entity
 public class History {
+    @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
-    private Long entryId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "entry_id")
+    private Entry entry;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
@@ -12,37 +23,17 @@ public class History {
         startTime = LocalDateTime.now();
     }
 
-
-    public Long getId() {
-        return id;
+    public History(Entry entry) {
+        this();
+        this.entry = entry;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return "History{" +
+                "Entry=" + entry.getUser().getEmail() + "/" + entry.getGoal().getName() +
+                ", startTime=" + startTime.toString() +
+                ", endTime=" + (endTime == null ? "null" : endTime.toString()) +
+                "}";
     }
-
-    public Long getEntryId() {
-        return entryId;
-    }
-
-    public void setEntryId(Long entryId) {
-        this.entryId = entryId;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
 }
