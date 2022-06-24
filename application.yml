@@ -3,19 +3,14 @@ spring:
     database-platform: org.hibernate.dialect.MySQL57Dialect
     show-sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
 
   datasource:
     url: jdbc:mariadb://tdb.wssw.kr:3306/toyproj
     driver-class-name: org.mariadb.jdbc.Driver
     username: testuser
     password: qwer1234!
-
   security:
     user:
       name: testuser
       password: qwer1234!
-
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
