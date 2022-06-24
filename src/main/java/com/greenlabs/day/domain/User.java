@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 public class User {
@@ -14,6 +17,11 @@ public class User {
     private String name;
     private String displayName;
     private String birth;
+
+    // 0: deactivate, 1: activate, else: unknown
+    private int active = 1;
+    private String roles = "";
+    private String permissions = "";
 
     public Long getId() {
         return id;
@@ -61,5 +69,21 @@ public class User {
 
     public void setDisplayName(String display_name) {
         this.displayName = display_name;
+    }
+
+    public List<String> getRoleList(){
+        if(this.roles.length()>0){
+            return Arrays.asList(this.roles.split(","));
+        }
+
+        return new ArrayList<>();
+    }
+
+    public List<String> getPermissionList(){
+        if(this.permissions.length()>0){
+            return Arrays.asList(this.permissions.split(","));
+        }
+
+        return new ArrayList<>();
     }
 }
