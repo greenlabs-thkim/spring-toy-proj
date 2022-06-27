@@ -6,6 +6,7 @@ import com.greenlabs.day.domain.Goal;
 import com.greenlabs.day.domain.History;
 import com.greenlabs.day.domain.User;
 import com.greenlabs.day.repository.GoalRepository;
+import com.greenlabs.day.repository.HistoryQueryDslRepository;
 import com.greenlabs.day.repository.HistoryRepository;
 import com.greenlabs.day.repository.UserRepository;
 import org.assertj.core.api.Assertions;
@@ -15,7 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -24,15 +24,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class HistoryServiceTest {
     private final HistoryService historyService;
     private final HistoryRepository historyRepository;
+    private final HistoryQueryDslRepository historyDetailRepository;
     private final UserRepository userRepository;
     private final GoalRepository goalRepository;
     private final EntryService entryService;
 
 
     @Autowired
-    public HistoryServiceTest(HistoryService historyService, HistoryRepository historyRepository, UserRepository userRepository, GoalRepository goalRepository, EntryService entryService) {
+    public HistoryServiceTest(HistoryService historyService, HistoryRepository historyRepository, HistoryQueryDslRepository historyDetailRepository, UserRepository userRepository, GoalRepository goalRepository, EntryService entryService) {
         this.historyService = historyService;
         this.historyRepository = historyRepository;
+        this.historyDetailRepository = historyDetailRepository;
         this.userRepository = userRepository;
         this.goalRepository = goalRepository;
         this.entryService = entryService;
@@ -61,6 +63,41 @@ public class HistoryServiceTest {
         Entry entry = getDefaultEntry();
         Long historyId = historyService.start(entry.getId());
         assertThrows(IllegalStateException.class, () -> historyService.start(entry.getId()));
+    }
+
+
+
+    @Test
+    void dslTest() {
+        Entry entry = getDefaultEntry();
+        Long historyId = historyService.start(entry.getId());
+        try {
+            Thread.sleep(500L);
+        } catch(InterruptedException ie) {
+            System.out.println(ie.toString());
+        }
+        historyService.finish(historyId);
+
+        try {
+            Thread.sleep(500L);
+        } catch(InterruptedException ie) {
+            System.out.println(ie.toString());
+        }
+
+        historyId = historyService.start(entry.getId());
+        try {
+            Thread.sleep(500L);
+        } catch(InterruptedException ie) {
+            System.out.println(ie.toString());
+        }
+        //historyService.finish(historyId);
+
+        List<History> byLastHistory = historyDetailRepository.findByLastHistory(entry.getUser().getId());
+        byLastHistory.forEach(history -> {
+            System.out.println(history);
+        });
+
+
     }
 
     Entry getDefaultEntry() {
